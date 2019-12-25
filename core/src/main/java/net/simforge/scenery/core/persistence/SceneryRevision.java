@@ -7,11 +7,11 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "is_revision")
+@Table(name = "lws_revision")
 public class SceneryRevision implements BaseEntity, Auditable {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "is_revision_id")
-    @SequenceGenerator(name = "is_revision_id", sequenceName = "is_revision_id_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "lws_revision_id")
+    @SequenceGenerator(name = "lws_revision_id", sequenceName = "lws_revision_id_seq", allocationSize = 1)
     private Integer id;
     @Version
     private Integer version;
