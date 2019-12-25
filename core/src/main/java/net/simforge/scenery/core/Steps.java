@@ -12,6 +12,7 @@ public class Steps {
     public static final String SCENERY_TEXTURE = "%SCENERY&TEXTURE%";
     public static final String ADDON_SCENERY = "%ADDON_SCENERY%";
     public static final String REPO_PATH = "%REPO_PATH%";
+    public static final String DEST_PATH = "%DEST_PATH%";
     public static final String OWN_FOLDER = ADDON_SCENERY + "/" + REPO_PATH;
     public static final String FSX_ROOT = "%FSX%";
     public static final String FSX_EFFECTS = FSX_ROOT + "/Effects";

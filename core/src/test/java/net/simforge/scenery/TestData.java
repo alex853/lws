@@ -28,6 +28,8 @@ public class TestData {
     public static final SceneryRevision lclkSSRevision = new SceneryRevision();
     public static final Scenery lcphMK = new Scenery();
     public static final SceneryRevision lcphMKRevision = new SceneryRevision();
+    public static final Scenery egph25A = new Scenery();
+    public static final SceneryRevision egph25ARevision = new SceneryRevision();
 
     private static final String SMALL_SCENERY_TO_ADDON_SCENERY = "[{file: '" + Steps.PACKAGE + "', source: '" + Steps.SCENERY_TEXTURE + "', dest: '" + Steps.ADDON_SCENERY + "'}]";
 
@@ -152,6 +154,20 @@ public class TestData {
                     .addStep("paphos_fsx_v2.zip", Steps.path("PAPHOS_FSX_v2", "Effects", "*").toString(), Steps.FSX_EFFECTS)
                     .addStep("paphos_fsx_v2-afcad_update.zip", "*.bgl", Steps.OWN_FOLDER + "/scenery")
                     .toJson());
+        });
+
+        fill(egph25A, egph25ARevision, (scenery, revision) -> {
+            scenery.setId(9);
+            scenery.setTitle("FFA - EGPH Edinburgh");
+            scenery.setAuthors("Rene Grothmann");
+            sceneryList.add(scenery);
+
+            revision.setScenery(scenery);
+            revision.setRevNumber(1);
+            revision.setRepoPath("FFA");
+            revision.setRepoMode(SceneryRevision.RepoMode.Archives);
+            revision.setDestPath(Steps.path(Steps.ADDON_SCENERY, "EGPH_25A").toString());
+            revision.setInstallationSteps("[{file: 'EGPH_25A.zip', source: 'EGPH_25A/%SCENERY&TEXTURE%', dest: '%DEST_PATH%'}]");
         });
     }
 

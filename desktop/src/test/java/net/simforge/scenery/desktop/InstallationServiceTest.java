@@ -221,6 +221,39 @@ public class InstallationServiceTest {
         assertLcphMKInstalled(false);
     }
 
+    @Test
+    public void testEgph25A() throws IOException {
+        assertFSXStructure();
+        assertEdliInstalled(false);
+        assertEgsjInstalled(false);
+        assertLimlInstalled(false);
+        assertEgllInstalled(false);
+        assertLcphMKInstalled(false);
+        assertEgph25AInstalled(false);
+
+        SceneryInfoDto egph = SceneryInfoDto.toDto(TestData.egph25A, TestData.egph25ARevision);
+
+        installationService.installScenery(egph);
+
+        assertFSXStructure();
+        assertEdliInstalled(false);
+        assertEgsjInstalled(false);
+        assertLimlInstalled(false);
+        assertEgllInstalled(false);
+        assertLcphMKInstalled(false);
+        assertEgph25AInstalled(true);
+
+        installationService.uninstallScenery(findInstalled(egph));
+
+        assertFSXStructure();
+        assertEdliInstalled(false);
+        assertEgsjInstalled(false);
+        assertLimlInstalled(false);
+        assertEgllInstalled(false);
+        assertLcphMKInstalled(false);
+        assertEgph25AInstalled(false);
+    }
+
     private void assertFSXStructure() {
         assertTrue(Files.exists(Paths.get(fsxRoot)));
         assertTrue(Files.exists(Paths.get(addonSceneryPath)));
@@ -287,6 +320,15 @@ public class InstallationServiceTest {
         assertEquals(expectedInstalled, testSceneryJson(TestData.lcphMK.getId()));
 
         assertEquals(expectedInstalled, testSceneryCfg("Addon Scenery\\LCPH_MaxKraus"));
+    }
+
+    private void assertEgph25AInstalled(boolean expectedInstalled) throws IOException {
+        // only few files checked here
+        assertEquals(expectedInstalled, new File(addonSceneryPath, "EGPH_25A/scenery/EGPH_ADEX_25A.BGL").exists());
+
+        assertEquals(expectedInstalled, testSceneryJson(TestData.egph25A.getId()));
+
+        assertEquals(expectedInstalled, testSceneryCfg("Addon Scenery\\EGPH_25A"));
     }
 
     private InstalledScenery findInstalled(SceneryInfoDto sceneryInfoDto) throws IOException {

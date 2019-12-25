@@ -115,6 +115,7 @@ public class InstallationService {
             context.put(Steps.FSX_ROOT, cfg.getFsPath());
             context.put(Steps.ADDON_SCENERY, cfg.getAddonSceneryPath());
             context.put(Steps.REPO_PATH, scenery.getRevisionRepoPath());
+            context.put(Steps.DEST_PATH, scenery.getRevisionDestPath());
             // todo add kind of group name
 
             List<String> files = new ArrayList<>();
@@ -182,7 +183,7 @@ public class InstallationService {
                 if (area == null) {
                     area = sceneryCfg.append();
                 }
-                area.setTitle(scenery.getSceneryTitle());
+                area.setTitle("[LWS] " + scenery.getSceneryTitle());
                 area.setLocal(local);
                 area.setActive(true);
                 area.setRequired(false);
