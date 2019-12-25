@@ -11,7 +11,7 @@ import org.hibernate.SessionFactory;
 
 import java.util.List;
 
-public class ImprovedScenery {
+public class LightWeightedScenery {
 
     public static final Class[] entities = {
             Scenery.class,
@@ -21,7 +21,7 @@ public class ImprovedScenery {
 
     public static SessionFactory buildSessionFactory() {
         return SessionFactoryBuilder
-                .forDatabase("improved-scenery")
+                .forDatabase("lws")
                 .entities(entities)
                 .entities(GeoRefData.entities)
                 .build();

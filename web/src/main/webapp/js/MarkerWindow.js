@@ -1,5 +1,5 @@
 
-Ext.define('ImprovedScenery.map.MarkerWindow', {
+Ext.define('LightWeightedScenery.map.MarkerWindow', {
     extend: 'Ext.window.Window',
     controller: 'marker-window-controller',
 

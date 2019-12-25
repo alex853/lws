@@ -293,6 +293,6 @@ public class InstallationService {
     }
 
     private String getInstalledSceneryFile(String localSettingsPath) {
-        return localSettingsPath + "/improved-scenery-installed.json";
+        return localSettingsPath + "/lws-installed.json";
     }
 }

@@ -1,4 +1,4 @@
-Ext.define('ImprovedScenery.map.SceneryInfoPanel', {
+Ext.define('LightWeightedScenery.map.SceneryInfoPanel', {
     extend: 'Ext.panel.Panel',
 
     viewModel: {

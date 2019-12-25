@@ -15,7 +15,7 @@ public class Configuration {
         Configuration cfg = new Configuration();
 
         Properties properties = new Properties();
-        try (FileInputStream fis = new FileInputStream("./improved-scenery.properties")) {
+        try (FileInputStream fis = new FileInputStream("./lws.properties")) {
             properties.load(fis);
         }
 

@@ -1,6 +1,6 @@
 package net.simforge.scenery.web;
 
-import net.simforge.scenery.core.ImprovedScenery;
+import net.simforge.scenery.core.LightWeightedScenery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
@@ -26,7 +26,7 @@ public class WebAppContext {
     private WebAppContext() {
         logger.info("creating session factory");
 
-        sessionFactory = ImprovedScenery.buildSessionFactory();
+        sessionFactory = LightWeightedScenery.buildSessionFactory();
 
         logger.info("session factory has been built");
     }

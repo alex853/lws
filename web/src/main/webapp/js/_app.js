@@ -1,6 +1,6 @@
 
 Ext.application({
-    name : 'ImprovedScenery',
+    name : 'LightWeightedScenery',
     
     controllers: [
         'GMapController'
@@ -16,7 +16,7 @@ Ext.application({
                     tbar: [
                         {
                             xtype: 'tbtext',
-                            text: 'Improved Scenery',
+                            text: 'LightWeighted Scenery',
                             width: 200
                         }/*,
 

@@ -7,7 +7,7 @@ import javax.swing.*;
 @Deprecated
 public class Client {
     public static void main(String[] args) {
-        JFrame frame = new JFrame("Improved Scenery");
+        JFrame frame = new JFrame("Light-Weighted Scenery");
         frame.setContentPane(new Form1().mainPanel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();

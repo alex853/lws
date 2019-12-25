@@ -1,5 +1,5 @@
 
-Ext.define('ImprovedScenery.map.SceneryInfoModel', {
+Ext.define('LightWeightedScenery.map.SceneryInfoModel', {
     extend: 'Ext.app.ViewModel',
 
     alias: 'viewmodel.scenery-info-model',

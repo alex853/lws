@@ -1,5 +1,5 @@
 
-Ext.define('ImprovedScenery.controller.GMapController', {
+Ext.define('LightWeightedScenery.controller.GMapController', {
     extend: 'Ext.app.Controller',
 
     control: {
@@ -30,7 +30,7 @@ Ext.define('ImprovedScenery.controller.GMapController', {
                 
                 var markers = {};
                 Ext.each(response.data, function (markerData) {
-                    var marker = new ImprovedScenery.map.Marker({
+                    var marker = new LightWeightedScenery.map.Marker({
                         data: markerData,
                         map: gmap
                     });

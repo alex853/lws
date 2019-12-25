@@ -1,6 +1,6 @@
 package net.simforge.scenery.core.service;
 
-import net.simforge.scenery.core.ImprovedScenery;
+import net.simforge.scenery.core.LightWeightedScenery;
 import net.simforge.scenery.core.persistence.SceneryRevision;
 
 import java.io.IOException;
@@ -24,7 +24,7 @@ public class SimpleRepositoryService implements RepositoryService {
     public void loadPackage(SceneryRevision revision, OutputStream outputStream) throws IOException {
         ZipOutputStream zipOutputStream = new ZipOutputStream(outputStream);
 
-        String location = repoRoot + "/" + revision.getRepoPath() + "/" + ImprovedScenery.revNumber(revision.getRevNumber());
+        String location = repoRoot + "/" + revision.getRepoPath() + "/" + LightWeightedScenery.revNumber(revision.getRevNumber());
         Path locationPath = Paths.get(location);
         List<String> files = new ArrayList<>();
         Files.walkFileTree(locationPath, new SimpleFileVisitor<Path>() {

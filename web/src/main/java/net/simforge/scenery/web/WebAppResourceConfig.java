@@ -52,7 +52,7 @@ public class WebAppResourceConfig extends ResourceConfig {
     public static class RepositoryServiceFactory implements Supplier<RepositoryService> {
         @Override
         public RepositoryService get() {
-            String repoPath = Settings.get("improved-scenery.repo-path");
+            String repoPath = Settings.get("lws.repo-path");
             if (repoPath == null) {
                 throw new IllegalStateException("Unable to work without repo-path configured");
             }

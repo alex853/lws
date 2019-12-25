@@ -1,5 +1,5 @@
 
-Ext.define('ImprovedScenery.map.Marker', {
+Ext.define('LightWeightedScenery.map.Marker', {
     data: null,
     map: null,
     marker: null,
@@ -82,7 +82,7 @@ Ext.define('ImprovedScenery.map.Marker', {
     },
 
     onMarkerClick: function() {
-        var window = new ImprovedScenery.map.MarkerWindow({
+        var window = new LightWeightedScenery.map.MarkerWindow({
             marker: this
         });
         window.show();

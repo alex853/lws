@@ -5,7 +5,7 @@ import com.google.gson.reflect.TypeToken;
 import net.simforge.commons.legacy.BM;
 import net.simforge.commons.misc.RestUtils;
 import net.simforge.refdata.aircraft.model.geo.Airport;
-import net.simforge.scenery.core.ImprovedScenery;
+import net.simforge.scenery.core.LightWeightedScenery;
 import net.simforge.scenery.core.persistence.Scenery;
 import net.simforge.scenery.core.persistence.SceneryObject;
 import net.simforge.scenery.core.persistence.SceneryRevision;
@@ -57,13 +57,13 @@ public class MapProvider {
                     .list();
 
             for (Scenery scenery : sceneryList) {
-                SceneryRevision revision = ImprovedScenery.loadLastPublishedRevision(session, scenery);
+                SceneryRevision revision = LightWeightedScenery.loadLastPublishedRevision(session, scenery);
 
                 if (revision == null) {
                     continue;
                 }
 
-                List<SceneryObject> objects = ImprovedScenery.loadObjects(session, revision);
+                List<SceneryObject> objects = LightWeightedScenery.loadObjects(session, revision);
                 for (SceneryObject object : objects) {
                     switch (object.getType()) {
                         case SceneryObject.Type.Airport:
@@ -107,7 +107,7 @@ public class MapProvider {
             for (Integer sceneryId : sceneryIds) {
 
                 Scenery scenery = session.load(Scenery.class, sceneryId);
-                SceneryRevision publishedRevision = ImprovedScenery.loadLastPublishedRevision(session, scenery);
+                SceneryRevision publishedRevision = LightWeightedScenery.loadLastPublishedRevision(session, scenery);
 
                 SceneryInfoDto dto = new SceneryInfoDto();
                 dto.setId(String.valueOf(scenery.getId()));

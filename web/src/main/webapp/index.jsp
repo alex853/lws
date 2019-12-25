@@ -1,9 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Improved Scenery</title>
+    <title>Light-Weighted Scenery</title>
 
-    <meta name="description" content="Improved Scenery"/>
+    <meta name="description" content="Light-Weighted Scenery"/>
 
     <link rel="icon" type="image/png" href="images/fatcow/32/globe_model.png" sizes="32x32">
 

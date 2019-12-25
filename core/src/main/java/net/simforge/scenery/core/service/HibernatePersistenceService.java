@@ -1,7 +1,7 @@
 package net.simforge.scenery.core.service;
 
 import net.simforge.commons.legacy.BM;
-import net.simforge.scenery.core.ImprovedScenery;
+import net.simforge.scenery.core.LightWeightedScenery;
 import net.simforge.scenery.core.persistence.Scenery;
 import net.simforge.scenery.core.persistence.SceneryRevision;
 import org.hibernate.Session;
@@ -48,7 +48,7 @@ public class HibernatePersistenceService implements PersistenceService {
         BM.start("HibernatePersistenceService.loadLastPublishedRevision");
         try (Session session = sessionFactory.openSession()) {
 
-            return ImprovedScenery.loadLastPublishedRevision(session, scenery);
+            return LightWeightedScenery.loadLastPublishedRevision(session, scenery);
 
         } finally {
             BM.stop();

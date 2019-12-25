@@ -14,7 +14,7 @@ import java.util.List;
 
 public class AddTestData {
     public static void main(String[] args) {
-        try (SessionFactory sessionFactory = ImprovedScenery.buildSessionFactory();
+        try (SessionFactory sessionFactory = LightWeightedScenery.buildSessionFactory();
              Session session = sessionFactory.openSession()) {
 
             HibernateUtils.transaction(session, () -> {
@@ -142,7 +142,7 @@ public class AddTestData {
             throw new IllegalStateException("There is InProgress revision, can't add new one");
         }
 
-        SceneryRevision publishedRevision = ImprovedScenery.loadLastPublishedRevision(session, scenery);
+        SceneryRevision publishedRevision = LightWeightedScenery.loadLastPublishedRevision(session, scenery);
         if (publishedRevision == null) {
             throw new IllegalStateException("There is no Published revision");
         }
@@ -156,7 +156,7 @@ public class AddTestData {
         newRevision.setRepoPath(publishedRevision.getRepoPath());
         newRevision.setRepoMode(publishedRevision.getRepoMode());
 
-        List<SceneryObject> sObjects = ImprovedScenery.loadObjects(session, publishedRevision);
+        List<SceneryObject> sObjects = LightWeightedScenery.loadObjects(session, publishedRevision);
 
         List<SceneryObject> newSObjects = new ArrayList<>();
         for (SceneryObject sObject : sObjects) {

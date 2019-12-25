@@ -1,5 +1,5 @@
 
-Ext.define('ImprovedScenery.map.MarkerWindowController', {
+Ext.define('LightWeightedScenery.map.MarkerWindowController', {
     extend: 'Ext.app.ViewController',
     alias: 'controller.marker-window-controller',
 
@@ -28,7 +28,7 @@ Ext.define('ImprovedScenery.map.MarkerWindowController', {
                 }
 
                 Ext.each(response.data, function (sceneryInfoData) {
-                    var panel = new ImprovedScenery.map.SceneryInfoPanel();
+                    var panel = new LightWeightedScenery.map.SceneryInfoPanel();
                     var vm = panel.getViewModel();
                     vm.setData(sceneryInfoData);
                     view.add(panel);
