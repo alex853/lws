@@ -84,30 +84,30 @@ public class InstallationService {
                     }.getType());
             logger.debug("Installation steps parsed - {} steps", steps.size());
 
-            Map<String, String> stepFile_2_archiveFile = new HashMap<>();
+            Map<String, String> stepFile_2_localFile = new HashMap<>();
             for (StepDto step : steps) {
                 String stepFile = step.getFile();
-                String archiveFile;
+                String localFile;
                 if (Steps.PACKAGE.equals(stepFile)) {
-                    archiveFile = workFolder + "/" + scenery.getRevisionRepoPath() + "-" + System.currentTimeMillis() + ".package.zip";
+                    localFile = workFolder + "/" + scenery.getRevisionRepoPath().replace('/', '_') + "-" + System.currentTimeMillis() + ".package.zip";
                 } else {
-                    archiveFile = workFolder + "/" + scenery.getRevisionRepoPath() + "-" + System.currentTimeMillis() + "." + stepFile;
+                    localFile = workFolder + "/" + scenery.getRevisionRepoPath().replace('/', '_') + "-" + System.currentTimeMillis() + "." + stepFile;
                 }
-                stepFile_2_archiveFile.put(stepFile, archiveFile);
+                stepFile_2_localFile.put(stepFile, localFile);
             }
-            logger.debug("Files to load: {}", Joiner.on(", ").join(stepFile_2_archiveFile.keySet()));
+            logger.debug("Files to load: {}", Joiner.on(", ").join(stepFile_2_localFile.keySet()));
 
             // todo scenery.getRepoMode();
 
-            for (Map.Entry<String, String> entry : stepFile_2_archiveFile.entrySet()) {
+            for (Map.Entry<String, String> entry : stepFile_2_localFile.entrySet()) {
                 String stepFile = entry.getKey();
-                String archiveFile = entry.getValue();
+                String localFile = entry.getValue();
 
-                logger.debug("Loading archive {} to file {}", stepFile, archiveFile);
+                logger.debug("Loading archive {} to file {}", stepFile, localFile);
                 if (Steps.PACKAGE.equals(stepFile)) {
-                    restClient.downloadPackage(scenery, archiveFile);
+                    restClient.downloadPackage(scenery, localFile);
                 } else {
-                    restClient.downloadArchive(scenery, stepFile, archiveFile);
+                    restClient.downloadArchive(scenery, stepFile, localFile);
                 }
             }
 
@@ -121,7 +121,7 @@ public class InstallationService {
             List<String> files = new ArrayList<>();
             for (StepDto step : steps) {
                 String stepFile = step.getFile();
-                String destFile = stepFile_2_archiveFile.get(stepFile);
+                String destFile = stepFile_2_localFile.get(stepFile);
 
                 logger.debug("Doing {}", step);
                 int copied = 0;
@@ -159,7 +159,7 @@ public class InstallationService {
                 logger.debug("Step stats: copied {} files, skipped {} files", copied, skipped);
             }
 
-            for (Map.Entry<String, String> entry : stepFile_2_archiveFile.entrySet()) {
+            for (Map.Entry<String, String> entry : stepFile_2_localFile.entrySet()) {
                 String destFile = entry.getValue();
 
                 new File(destFile).deleteOnExit();
