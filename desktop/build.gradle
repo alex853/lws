@@ -1,0 +1,34 @@
+version '1.0-SNAPSHOT'
+
+apply plugin: 'application'
+apply plugin: 'java'
+
+archivesBaseName = 'lws-desktop'
+
+repositories {
+    mavenCentral()
+    maven {
+        url 'https://mymavenrepo.com/repo/9k6aQjU4o2RPUv5zfolv/'
+    }
+}
+
+dependencies {
+    compile group: 'net.simforge', name: 'simforge-commons', version: '1.0.5'
+    compile group: 'net.simforge', name: 'simforge-commons-ext', version: '1.0.2'
+
+    compile project(':core')
+
+    testCompile project(':core').sourceSets.test.output
+
+    compile('com.google.code.gson:gson:2.6.2')
+
+    compile group: 'com.intellij', name: 'forms_rt', version: '7.0.3'
+
+    compile group: 'ch.qos.logback', name: 'logback-core', version: '1.1.7'
+    compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.1.7'
+
+    testCompile 'junit:junit:4.11'
+    testCompile group: 'org.mockito', name: 'mockito-core', version: '2.10.0'
+}
+
+mainClassName = 'net.simforge.scenery.desktop.Probe'

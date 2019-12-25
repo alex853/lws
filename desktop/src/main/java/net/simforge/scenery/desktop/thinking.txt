@@ -1,0 +1,18 @@
+
+install some scenery
+uninstall all
+
+update everything according to the user choice
+
+user choice is:
+  * install everything with some tag
+  * do not install anything with some tag
+  * install some specific scenery
+
+
+any operation means:
+  * loading scenery list
+  * make a "to be" picture - list of sceneries selected for installation/update
+  * compare it with actually installed sceneries
+  * uninstall unnecessary sceneries
+  * install necessary sceneries

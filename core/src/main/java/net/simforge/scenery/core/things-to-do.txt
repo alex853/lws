@@ -1,0 +1,16 @@
+
+roles:              Admin, Author, User
+groups:             Improved Layouts
+                    Highly Detailed Scenery
+                    Fictional Scenery
+streams:            Published (upgrade group to last published revisions)
+                    WIP (upgrade group to WIP revisions or to last published)
+
+
+
+public enum LevelOfDetails {
+    ImprovedLayout,
+    LowLevel,
+    MidLevel,
+    HighLevel
+}

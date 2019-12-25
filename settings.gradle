@@ -1,0 +1,4 @@
+rootProject.name = 'lws'
+include 'core'
+include 'desktop'
+include 'web'

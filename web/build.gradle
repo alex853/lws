@@ -1,0 +1,44 @@
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'war'
+
+archivesBaseName = 'lws-web'
+
+repositories {
+    mavenCentral()
+    maven {
+        url 'https://mymavenrepo.com/repo/9k6aQjU4o2RPUv5zfolv/'
+    }
+}
+
+dependencies {
+    compile group: 'net.simforge', name: 'simforge-commons', version: '1.0.5'
+    compile group: 'net.simforge', name: 'simforge-commons-ext', version: '1.0.2'
+
+    compile project(':core')
+
+    testCompile project(':core').sourceSets.test.output
+
+    compile('com.google.code.gson:gson:2.6.2')
+
+    compile('javax.servlet:servlet-api:2.5')
+    compile('org.glassfish.jersey.containers:jersey-container-servlet:2.26')
+    compile('org.glassfish.jersey.media:jersey-media-json-jackson:2.4.1')
+    compile group: 'com.sun.jersey', name: 'jersey-core', version: '1.19.4'
+    compile group: 'org.glassfish.jersey.inject', name: 'jersey-hk2', version: '2.26'
+
+    testCompile 'junit:junit:4.11'
+    testCompile group: 'org.mockito', name: 'mockito-core', version: '2.10.0'
+
+    testCompile group: 'org.glassfish.jersey.test-framework', name: 'jersey-test-framework-core', version: '2.26'
+    testCompile group: 'org.glassfish.jersey.test-framework.providers', name: 'jersey-test-framework-provider-grizzly2', version: '2.26'
+}
+
+war {
+    from('./') {
+        include 'simforge.properties'
+        include 'logback.xml'
+        into('WEB-INF/classes')
+    }
+}

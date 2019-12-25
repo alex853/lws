@@ -1,0 +1,26 @@
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+
+archivesBaseName = 'lws-core'
+
+repositories {
+    mavenCentral()
+    maven {
+        url 'https://mymavenrepo.com/repo/9k6aQjU4o2RPUv5zfolv/'
+    }
+}
+
+dependencies {
+    compile group: 'net.simforge', name: 'simforge-commons', version: '1.0.5'
+    compile group: 'net.simforge', name: 'simforge-commons-ext', version: '1.0.2'
+
+    compile group: 'com.google.code.gson', name: 'gson', version: '2.6.2'
+    compile group: 'com.google.guava', name: 'guava', version: '23.5-jre'
+
+    compile 'org.hibernate:hibernate-core:5.0.1.Final'
+    compile 'org.hibernate:hibernate-java8:5.0.1.Final'
+    compile 'postgresql:postgresql:9.1-901-1.jdbc4'
+
+    testCompile 'junit:junit:4.11'
+}
