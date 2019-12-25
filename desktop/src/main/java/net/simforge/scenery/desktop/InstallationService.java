@@ -40,7 +40,7 @@ public class InstallationService {
         BM.start("InstallationService.getInstalledSceneryList");
         try {
             List<InstalledScenery> installedSceneryList = null;
-            String installedSceneryFile = getInstalledSceneryFile(cfg.getLocalSettingsPath());
+            String installedSceneryFile = getInstalledSceneryFile();
 
             if (new File(installedSceneryFile).exists()) {
                 logger.debug("Scenery status file - loading from {}", installedSceneryFile);
@@ -213,7 +213,7 @@ public class InstallationService {
     }
 
     private String getWorkingFolder() {
-        String workFolder = cfg.getLocalSettingsPath() + "/work";
+        String workFolder = cfg.getLocalSettingsPath() + "/work"; // todo bad idea
         new File(workFolder).mkdirs();
         return workFolder;
     }
@@ -281,7 +281,7 @@ public class InstallationService {
         BM.start("InstallationService._saveInstalledSceneryList");
         try {
             String localSettingsPath = cfg.getLocalSettingsPath();
-            String installedSceneryFile = getInstalledSceneryFile(localSettingsPath);
+            String installedSceneryFile = getInstalledSceneryFile();
 
             try (FileWriter writer = new FileWriter(installedSceneryFile)) {
                 new Gson().toJson(installedSceneryList, writer);
@@ -293,7 +293,7 @@ public class InstallationService {
         }
     }
 
-    private String getInstalledSceneryFile(String localSettingsPath) {
-        return localSettingsPath + "/lws-installed.json";
+    private String getInstalledSceneryFile() {
+        return new File(cfg.getSceneryCfgPath()).getParent().toString() + "/lws-installed.json";
     }
 }
