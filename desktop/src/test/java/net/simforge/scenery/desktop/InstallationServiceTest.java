@@ -324,7 +324,7 @@ public class InstallationServiceTest {
 
     private void assertEgph25AInstalled(boolean expectedInstalled) throws IOException {
         // only few files checked here
-        assertEquals(expectedInstalled, new File(addonSceneryPath, "EGPH_25A/scenery/EGPH_ADEX_25A.bgl").exists());
+        assertEquals(expectedInstalled, new File(addonSceneryPath, "EGPH_25A/Scenery/EGPH_ADEX_25A.bgl").exists());
 
         assertEquals(expectedInstalled, testSceneryJson(TestData.egph25A.getId()));
 
