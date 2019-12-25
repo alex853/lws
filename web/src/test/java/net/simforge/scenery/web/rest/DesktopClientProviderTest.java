@@ -72,6 +72,9 @@ public class DesktopClientProviderTest extends JerseyTest {
 
         Mockito.when(persistenceServiceMock.loadScenery(8)).thenReturn(TestData.lcphMK);
         Mockito.when(persistenceServiceMock.loadLastPublishedRevision(TestData.lcphMK)).thenReturn(TestData.lcphMKRevision);
+
+        Mockito.when(persistenceServiceMock.loadScenery(9)).thenReturn(TestData.egph25A);
+        Mockito.when(persistenceServiceMock.loadLastPublishedRevision(TestData.egph25A)).thenReturn(TestData.egph25ARevision);
     }
 
     @Test
@@ -82,7 +85,7 @@ public class DesktopClientProviderTest extends JerseyTest {
 
         List<SceneryInfoDto> data = response.getData();
 
-        assertEquals(8, data.size());
+        assertEquals(9, data.size());
 
         SceneryInfoDto edli = data.get(0);
         assertEquals("1", edli.getId());
