@@ -100,4 +100,43 @@ public class DesktopClientProvider {
             BM.stop();
         }
     }
+
+    @GET
+    @Path("/download-archive")
+    public Response downloadPackage(@QueryParam("sceneryId") String _sceneryId, @QueryParam("archiveName") String _archiveName) {
+        BM.start("DesktopClientProvider.downloadArchive");
+        try {
+            int sceneryId = Integer.parseInt(_sceneryId);
+
+            Scenery scenery = persistenceService.loadScenery(sceneryId);
+            if (scenery == null) {
+                return Response.status(404, "Can't find scenery").build();
+            }
+
+            SceneryRevision revision = persistenceService.loadLastPublishedRevision(scenery);
+
+            // check if the scenery is exploded in the repository
+            boolean archiveMode = revision.getRepoMode().equals(SceneryRevision.RepoMode.Archives);
+
+            if (!archiveMode) {
+                return Response.status(404, "The scenery is not in archive mode").build();
+            }
+
+            StreamingOutput fileStream = outputStream -> {
+                repositoryService.loadArchive(revision, _archiveName, outputStream);
+
+                outputStream.flush();
+            };
+
+            return Response
+                    .ok(fileStream, MediaType.APPLICATION_OCTET_STREAM)
+                    .header("content-disposition", "attachment; filename = package.zip")
+                    .build();
+        } catch (Throwable t) {
+            logger.error("Server error happened", t);
+            return Response.status(500, "Server error happened").build();
+        } finally {
+            BM.stop();
+        }
+    }
 }
