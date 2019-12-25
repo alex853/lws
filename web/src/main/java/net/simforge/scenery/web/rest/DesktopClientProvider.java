@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Map;
 
 @Path("/desktop")
-public class DesktopClientProvider {
+public class DesktopClientProvider { // todo logging
 
     private static final Logger logger = LoggerFactory.getLogger(DesktopClientProvider.class.getName());
 
