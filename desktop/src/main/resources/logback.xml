@@ -2,9 +2,9 @@
 
 <configuration scan="true">
 
-    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <pattern>%d{HH:mm:ss.SSS} [%-20thread] %-5level %-40logger{40} - %msg%n</pattern>
+            <pattern>%msg%n</pattern>
         </encoder>
     </appender>
 
@@ -12,17 +12,17 @@
 
     <appender name="FILE" class="ch.qos.logback.core.FileAppender">
         <file>logs/logback-${bySecond}.log</file>
-
         <encoder>
             <pattern>%d{HH:mm:ss.SSS} [%-20thread] %-5level %-40logger{40} - %msg%n</pattern>
         </encoder>
     </appender>
 
-    <logger name="net.simforge" level="ALL"/>
-
-    <root level="INFO">
-        <appender-ref ref="STDOUT"/>
+    <root level="trace">
         <appender-ref ref="FILE"/>
     </root>
+
+    <logger name="net.simforge.scenery.desktop.Installer" level="info">
+        <appender-ref ref="CONSOLE"/>
+    </logger>
 
 </configuration>
