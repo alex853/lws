@@ -77,7 +77,7 @@ public class DesktopClientProvider { // todo logging
             SceneryRevision revision = persistenceService.loadLastPublishedRevision(scenery);
 
             // check if the scenery is exploded in the repository
-            boolean packageMode = revision.getRepoMode().equals(SceneryRevision.RepoMode.Package);
+            boolean packageMode = revision.getRepoMode() != null && revision.getRepoMode().equals(SceneryRevision.RepoMode.Package);
 
             if (!packageMode) {
                 return Response.status(404, "The scenery is not in package mode").build();
@@ -116,7 +116,7 @@ public class DesktopClientProvider { // todo logging
             SceneryRevision revision = persistenceService.loadLastPublishedRevision(scenery);
 
             // check if the scenery is exploded in the repository
-            boolean archiveMode = revision.getRepoMode().equals(SceneryRevision.RepoMode.Archives);
+            boolean archiveMode = revision.getRepoMode() != null && revision.getRepoMode().equals(SceneryRevision.RepoMode.Archives);
 
             if (!archiveMode) {
                 return Response.status(404, "The scenery is not in archive mode").build();

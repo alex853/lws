@@ -146,7 +146,7 @@ public class InstallationService {
                             files.add(destFilename);
                         }
 
-                        logger.trace("File {} goes to {}", file, destFile);
+                        logger.trace("File {} goes to {}", file, destFilename);
 
                         Path destPath = Paths.get(destFilename);
                         Files.createDirectories(destPath.getParent());
