@@ -1,5 +1,6 @@
 // todo installer distribution
 // todo rename module to installer
+// todo run-as-admin issue in win-8
 
 apply plugin: 'application'
 apply plugin: 'java'
