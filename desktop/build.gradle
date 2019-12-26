@@ -1,3 +1,5 @@
+// todo installer distribution
+// todo rename module to installer
 
 apply plugin: 'application'
 apply plugin: 'java'
