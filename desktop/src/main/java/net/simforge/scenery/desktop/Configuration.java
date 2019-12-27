@@ -8,7 +8,7 @@ public class Configuration {
 
     private String fsPath;
     private String sceneryCfgPath;
-    private String localSettingsPath;
+    private String localStorePath;
     private String desktopClientServiceUrl;
 
     public static Configuration load() throws IOException {
@@ -19,7 +19,7 @@ public class Configuration {
             properties.load(fis);
         }
 
-        cfg.localSettingsPath = ".";
+        cfg.localStorePath = "./work";
         cfg.fsPath = (String) properties.get("fsPath");
         cfg.sceneryCfgPath = (String) properties.get("sceneryCfgPath");
         cfg.desktopClientServiceUrl = (String) properties.get("desktopClientServiceUrl");
@@ -39,8 +39,8 @@ public class Configuration {
         return fsPath + "/Addon Scenery";
     }
 
-    public String getLocalSettingsPath() {
-        return localSettingsPath;
+    public String getLocalStorePath() {
+        return localStorePath;
     }
 
     public String getDesktopClientServiceUrl() {

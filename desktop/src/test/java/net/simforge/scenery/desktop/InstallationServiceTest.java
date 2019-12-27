@@ -59,7 +59,7 @@ public class InstallationServiceTest {
         Mockito.when(cfg.getFsPath()).thenReturn(fsxRoot);
         Mockito.when(cfg.getSceneryCfgPath()).thenReturn(sceneryCfgPath);
         Mockito.when(cfg.getAddonSceneryPath()).thenReturn(addonSceneryPath);
-        Mockito.when(cfg.getLocalSettingsPath()).thenReturn(testFolder);
+        Mockito.when(cfg.getLocalStorePath()).thenReturn(testFolder);
 
         restClient = Mockito.mock(RestClient.class);
 

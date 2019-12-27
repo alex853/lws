@@ -69,7 +69,7 @@ public class InstallationService {
                     scenery.getRevisionNumber(),
                     scenery.getRevisionRepoPath());
 
-            String workFolder = getWorkingFolder();
+            String localStore = getLocalStoreFolder();
 
             if (scenery.getRevisionInstallationSteps() == null) {
                 throw new IllegalArgumentException("No installation steps for scenery, unable to install scenery");
@@ -86,9 +86,9 @@ public class InstallationService {
                 String stepFile = step.getFile();
                 String localFile;
                 if (Steps.PACKAGE.equals(stepFile)) {
-                    localFile = workFolder + "/" + scenery.getRevisionRepoPath().replace('/', '_') + "-" + System.currentTimeMillis() + ".package.zip";
+                    localFile = localStore + "/" + scenery.getRevisionRepoPath().replace('/', '_') + "-" + System.currentTimeMillis() + ".package.zip";
                 } else {
-                    localFile = workFolder + "/" + scenery.getRevisionRepoPath().replace('/', '_') + "-" + System.currentTimeMillis() + "." + stepFile;
+                    localFile = localStore + "/" + scenery.getRevisionRepoPath().replace('/', '_') + "-" + System.currentTimeMillis() + "." + stepFile;
                 }
                 stepFile_2_localFile.put(stepFile, localFile);
             }
@@ -209,8 +209,8 @@ public class InstallationService {
         }
     }
 
-    private String getWorkingFolder() {
-        String workFolder = cfg.getLocalSettingsPath() + "/work"; // todo bad idea
+    private String getLocalStoreFolder() {
+        String workFolder = cfg.getLocalStorePath();
         new File(workFolder).mkdirs();
         return workFolder;
     }
@@ -319,13 +319,16 @@ public class InstallationService {
             return "Addon Scenery".equalsIgnoreCase(prevName);
         }
 
+        if ("Effects".equalsIgnoreCase(lastName)) {
+            return true;
+        }
+
         return false;
     }
 
     private void _saveInstalledSceneryList(List<InstalledScenery> installedSceneryList) throws IOException {
         BM.start("InstallationService._saveInstalledSceneryList");
         try {
-            String localSettingsPath = cfg.getLocalSettingsPath();
             String installedSceneryFile = getInstalledSceneryFile();
 
             try (FileWriter writer = new FileWriter(installedSceneryFile)) {
