@@ -35,7 +35,7 @@ public class HibernatePersistenceService implements PersistenceService {
 
             //noinspection unchecked,JpaQlInspection
             return session
-                    .createQuery("from Scenery")
+                    .createQuery("from Scenery") // todo it fails when some scenery does not have published revision
                     .list();
 
         } finally {
