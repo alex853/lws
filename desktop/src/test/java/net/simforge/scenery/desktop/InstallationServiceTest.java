@@ -294,9 +294,6 @@ public class InstallationServiceTest {
     private void assertEgllInstalled(boolean expectedInstalled) throws IOException {
         assertEquals(expectedInstalled, new File(addonSceneryPath, TestData.egllRevision.getRepoPath() + "/scenery/EGLL_ADE_RS.BGL").exists());
 
-        // folders check
-        // todo uncomment it assertEquals(expectedInstalled, new File(addonSceneryPath, TestData.egllRevision.getRepoPath()).exists());
-
         assertEquals(expectedInstalled, testSceneryJson(TestData.egll.getId()));
 
         assertEquals(expectedInstalled, testSceneryCfg("Addon Scenery\\EGLL"));
@@ -313,9 +310,6 @@ public class InstallationServiceTest {
         assertEquals(expectedInstalled, new File(addonSceneryPath, TestData.lcphMKRevision.getRepoPath() + "/texture/c172_r.bmp").exists());
         assertEquals(expectedInstalled, new File(fsxRoot + "/Effects", "Cntrl_LCPH_TaxiGreen.fx").exists());
         assertEquals(expectedInstalled, new File(fsxRoot + "/Effects", "fx_LCPH_TaxiGreen.fx").exists());
-
-        // folders check
-        // todo uncomment it assertEquals(expectedInstalled, new File(addonSceneryPath, TestData.lcphMKRevision.getRepoPath()).exists());
 
         assertEquals(expectedInstalled, testSceneryJson(TestData.lcphMK.getId()));
 
