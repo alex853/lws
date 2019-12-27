@@ -17,10 +17,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
@@ -243,13 +240,42 @@ public class InstallationService {
             List<String> files = installedScenery.getFiles();
             logger.debug("There are {} files for deletion", files.size());
 
-            // todo remove scenery-specific folders
+            Set<Path> folders = new TreeSet<>();
             for (String file : files) {
                 Path path = Paths.get(file);
                 if (Files.exists(path)) {
                     Files.delete(path);
                 }
                 logger.trace("File {} deleted", file);
+
+                folders.add(path.getParent());
+            }
+
+            logger.debug("There are {} folders for deletion", folders.size());
+            for (Path _folder : folders) {
+                File folder = _folder.toFile();
+                while (true) {
+                    if (!folder.exists()) {
+                        logger.trace("Folder {} does not exist", folder);
+                        break;
+                    }
+
+                    boolean isFSXFolder = isFSXFolder(folder); // any of FSX folder - Addon Scenery, or Addon Scenery/scenery, etc
+                    if (isFSXFolder) {
+                        logger.trace("Folder {} relates to sim, stopping", folder);
+                        break;
+                    }
+
+                    boolean filesArePresented = folder.list().length != 0;
+                    if (!filesArePresented) {
+                        folder.delete();
+                        logger.trace("Folder {} deleted", folder);
+                    } else {
+                        logger.trace("Folder {} is not empty, stopping", folder);
+                    }
+
+                    folder = folder.getParentFile();
+                }
             }
 
 
@@ -275,6 +301,25 @@ public class InstallationService {
         } finally {
             BM.stop();
         }
+    }
+
+    private boolean isFSXFolder(File folder) {
+        String lastName = folder.getName();// getName(folder.getNameCount() - 1).toString();
+        String prevName = folder.getParentFile().getName();// getNameCount() > 1 ? folder.getName(folder.getNameCount() - 2).toString() : null;
+
+        if ("Addon Scenery".equalsIgnoreCase(lastName)) {
+            return true;
+        }
+
+        if ("Scenery".equalsIgnoreCase(lastName)) {
+            return "Addon Scenery".equalsIgnoreCase(prevName);
+        }
+
+        if ("Texture".equalsIgnoreCase(lastName)) {
+            return "Addon Scenery".equalsIgnoreCase(prevName);
+        }
+
+        return false;
     }
 
     private void _saveInstalledSceneryList(List<InstalledScenery> installedSceneryList) throws IOException {
