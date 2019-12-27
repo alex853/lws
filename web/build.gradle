@@ -1,3 +1,5 @@
+// todo bm web filter
+// todo move fatcow icons to separate webapp
 
 apply plugin: 'java'
 apply plugin: 'war'
