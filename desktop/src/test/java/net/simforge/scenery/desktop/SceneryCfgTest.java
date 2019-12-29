@@ -6,10 +6,9 @@ import org.junit.Test;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Collection;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class SceneryCfgTest {
     @Test
@@ -73,4 +72,36 @@ public class SceneryCfgTest {
 
         tmpFile.deleteOnExit();
     }
+
+    @Test
+    public void testUK2000Issue_justLoad() throws IOException {
+        SceneryCfg sceneryCfg = SceneryCfg.load(IOHelper.resourceToPath(SceneryCfgTest.class, "Scenery.fsx-uk2000-issue.cfg"));
+        assertEquals(187, sceneryCfg.getAreas().size());
+
+        SceneryCfg.Area uk2000ManchesterXtreme = sceneryCfg.getAreaByNumber(186);
+        assertEquals("D:\\Steam\\steamapps\\common\\FSX\\UK2000 Scenery\\UK2000 Manchester Xtreme", uk2000ManchesterXtreme.getLocal());
+    }
+
+    @Test
+    public void testUK2000Issue_omitSavingOfMissingRequired() throws IOException {
+        SceneryCfg sceneryCfg = SceneryCfg.load(IOHelper.resourceToPath(SceneryCfgTest.class, "Scenery.fsx-uk2000-issue.cfg"));
+        assertEquals(187, sceneryCfg.getAreas().size());
+
+        SceneryCfg.Area uk2000ManchesterXtreme = sceneryCfg.getAreaByNumber(186);
+        assertNull(uk2000ManchesterXtreme.isRequired());
+
+        File tmpFile = new File("./temp/scenery." + System.currentTimeMillis() + ".cfg");
+        tmpFile.getParentFile().mkdirs();
+
+        sceneryCfg.save(tmpFile.getAbsolutePath());
+
+        sceneryCfg = SceneryCfg.load(tmpFile.getAbsolutePath());
+
+        assertEquals(187, sceneryCfg.getAreas().size());
+        uk2000ManchesterXtreme = sceneryCfg.getAreaByNumber(186);
+        assertNull(uk2000ManchesterXtreme.isRequired());
+
+        tmpFile.deleteOnExit();
+    }
+
 }

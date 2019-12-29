@@ -76,8 +76,8 @@ public class Installer {
                 logger.info("    {} of {} done", ++counter, operations.size());
             }
             logger.info("Finished successfully");
-        } catch (IOException e) {
-            logger.error("IO error", e);
+        } catch (Throwable t) {
+            logger.error("Error happened", t);
         }
     }
 

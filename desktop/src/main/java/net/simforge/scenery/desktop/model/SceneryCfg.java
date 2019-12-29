@@ -191,7 +191,7 @@ public class SceneryCfg {
     }
 
     private static boolean isParam(String line, String paramName) {
-        return line.startsWith(paramName + "=");
+        return line.toUpperCase().startsWith(paramName.toUpperCase() + "=");
     }
 
     private static String getParamString(String line) {
@@ -204,14 +204,14 @@ public class SceneryCfg {
         return Integer.parseInt(value);
     }
 
-    private static boolean getParamBoolean(String line) {
+    private static Boolean getParamBoolean(String line) {
         String value = getParamString(line);
         if (value.equals("TRUE")) {
             return true;
         } else if (value.equals("FALSE")) {
             return false;
         } else {
-            throw new IllegalStateException("Can't parse boolean value from line '" + line + "'");
+            return null;
         }
     }
 
@@ -260,7 +260,7 @@ public class SceneryCfg {
             return layer;
         }
 
-        public boolean isActive() {
+        public Boolean isActive() {
             return active;
         }
 
@@ -268,11 +268,11 @@ public class SceneryCfg {
             this.active = active;
         }
 
-        public boolean isRequired() {
+        public Boolean isRequired() {
             return required;
         }
 
-        public void setRequired(boolean required) {
+        public void setRequired(Boolean required) {
             this.required = required;
         }
     }
