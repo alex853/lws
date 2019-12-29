@@ -166,7 +166,7 @@ public class InstallationService {
 
             String dest = scenery.getRevisionDestPath();
             String local = null;
-            if (dest != null) {
+            if (dest != null && !"%ADDON_SCENERY%/scenery".equalsIgnoreCase(dest)) { // todo more wise condition for "%ADDON_SCENERY%/scenery" to prevent creation of areas for sceneries being put into addon scenery
                 local = dest
                         .replaceAll(Steps.ADDON_SCENERY, "Addon Scenery")
                         .replaceAll(Steps.REPO_PATH, scenery.getRevisionRepoPath())
