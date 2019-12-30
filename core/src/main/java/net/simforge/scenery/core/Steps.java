@@ -15,7 +15,7 @@ public class Steps {
     public static final String DEST_PATH = "%DEST_PATH%";
     public static final String OWN_FOLDER = ADDON_SCENERY + "/" + REPO_PATH;
     public static final String FSX_ROOT = "%FSX%";
-    public static final String FSX_EFFECTS = FSX_ROOT + "/Effects";
+    public static final String FSX_EFFECTS = "%FSX_EFFECTS%";
 
     public static Steps newSteps() {
         return new Steps();

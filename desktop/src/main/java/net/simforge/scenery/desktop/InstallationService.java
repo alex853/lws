@@ -111,6 +111,7 @@ public class InstallationService {
             Map<String, String> context = new HashMap<>();
             context.put(Steps.FSX_ROOT, cfg.getFsPath());
             context.put(Steps.ADDON_SCENERY, cfg.getAddonSceneryPath());
+            context.put(Steps.FSX_EFFECTS, cfg.getFsPath() + "/Effects");
             context.put(Steps.REPO_PATH, scenery.getRevisionRepoPath());
             context.put(Steps.DEST_PATH, scenery.getRevisionDestPath());
             // todo add kind of group name
