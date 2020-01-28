@@ -254,6 +254,24 @@ public class InstallationServiceTest {
         assertEgph25AInstalled(false);
     }
 
+    @Test
+    public void testLoww() throws IOException {
+        assertFSXStructure();
+        assertLowwInstalled(false);
+
+        SceneryInfoDto loww = SceneryInfoDto.toDto(TestData.loww, TestData.lowwRevision);
+
+        installationService.installScenery(loww);
+
+        assertFSXStructure();
+        assertLowwInstalled(true);
+
+        installationService.uninstallScenery(findInstalled(loww));
+
+        assertFSXStructure();
+        assertLowwInstalled(false);
+    }
+
     private void assertFSXStructure() {
         assertTrue(Files.exists(Paths.get(fsxRoot)));
         assertTrue(Files.exists(Paths.get(addonSceneryPath)));
@@ -323,6 +341,12 @@ public class InstallationServiceTest {
         assertEquals(expectedInstalled, testSceneryJson(TestData.egph25A.getId()));
 
         assertEquals(expectedInstalled, testSceneryCfg("Addon Scenery\\EGPH_25A"));
+    }
+
+    private void assertLowwInstalled(boolean expectedInstalled) throws IOException {
+        // only few files checked here
+        assertEquals(expectedInstalled, new File(addonSceneryPath, "Scenery/LOWW_RS.BGL").exists());
+        assertEquals(expectedInstalled, new File(addonSceneryPath, "Scenery/LOWW_CVX.BGL").exists());
     }
 
     private InstalledScenery findInstalled(SceneryInfoDto sceneryInfoDto) throws IOException {

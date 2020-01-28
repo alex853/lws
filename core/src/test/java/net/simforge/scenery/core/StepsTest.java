@@ -66,6 +66,12 @@ public class StepsTest {
         assertEquals("scenery/EDLI-1710.bgl", Source.getMatchedFilename(SCENERY_TEXTURE, "scenery\\EDLI-1710.bgl"));
     }
 
+    @Test
+    public void testSource_sameExactFilenames_lowwError() {
+        assertTrue(Source.isMatch("FSX_loww_rs/LOWW_RS.BGL", "FSX_loww_rs/LOWW_RS.BGL"));
+        assertEquals("LOWW_RS.BGL", Source.getMatchedFilename("FSX_loww_rs/LOWW_RS.BGL", "FSX_loww_rs/LOWW_RS.BGL"));
+    }
+
     private void probe() {
 
         // EDLI, ...

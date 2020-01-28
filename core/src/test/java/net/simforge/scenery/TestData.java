@@ -30,6 +30,8 @@ public class TestData {
     public static final SceneryRevision lcphMKRevision = new SceneryRevision();
     public static final Scenery egph25A = new Scenery();
     public static final SceneryRevision egph25ARevision = new SceneryRevision();
+    public static final Scenery loww = new Scenery();
+    public static final SceneryRevision lowwRevision = new SceneryRevision();
 
     private static final String SMALL_SCENERY_TO_ADDON_SCENERY = "[{file: '" + Steps.PACKAGE + "', source: '" + Steps.SCENERY_TEXTURE + "', dest: '" + Steps.ADDON_SCENERY + "'}]";
 
@@ -168,6 +170,20 @@ public class TestData {
             revision.setRepoMode(SceneryRevision.RepoMode.Archives);
             revision.setDestPath(Steps.path(Steps.ADDON_SCENERY, "EGPH_25A").toString());
             revision.setInstallationSteps("[{file: 'EGPH_25A.zip', source: 'EGPH_25A/%SCENERY&TEXTURE%', dest: '%DEST_PATH%'}]");
+        });
+
+        fill(loww, lowwRevision, (scenery, revision) -> {
+            scenery.setId(10);
+            scenery.setTitle("LOWW by Ray Smith");
+            scenery.setAuthors("Ray Smith");
+            sceneryList.add(scenery);
+
+            revision.setScenery(scenery);
+            revision.setRevNumber(1);
+            revision.setRepoPath("LOWW");
+            revision.setRepoMode(SceneryRevision.RepoMode.Archives);
+            revision.setDestPath(Steps.ADDON_SCENERY + "/scenery");
+            revision.setInstallationSteps("[{file: 'fsx_loww_rs.zip', source: 'FSX_loww_rs/LOWW_RS.BGL', dest: '%DEST_PATH%'},{file: 'fsx_loww_rs.zip', source: 'FSX_loww_rs/LOWW_CVX.bgl', dest: '%DEST_PATH%'}]");
         });
     }
 

@@ -131,6 +131,12 @@ public class InstallationService {
                     while ((entry = zipInputStream.getNextEntry()) != null) {
                         String file = entry.getName();
 
+                        if (!Steps.Source.isMatch(step.getSource(), file)) {
+                            logger.trace("File {} skipped due no-match", file);
+                            skipped++;
+                            continue;
+                        }
+
                         String matchedFilename = Steps.Source.getMatchedFilename(step.getSource(), file);
                         if (matchedFilename == null) {
                             logger.trace("File {} skipped due no-match", file);

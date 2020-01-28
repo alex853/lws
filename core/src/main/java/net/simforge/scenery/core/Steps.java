@@ -67,6 +67,8 @@ public class Steps {
                         } else {
                             return null;
                         }
+                    } else {
+                        return null;
                     }
                 } else if (sourcePart.contains("*")) {
                     String regexp = sourcePart.toLowerCase().replaceAll("[.]", "[.]");
@@ -92,10 +94,14 @@ public class Steps {
                     if (!filenamePart.equalsIgnoreCase(sourcePart)) {
                         return null;
                     }
+
+                    if (i == sourceParts.length - 1 && sourceParts.length == filenameParts.length) {
+                        return filenamePart;
+                    }
                 }
             }
 
-            return null;
+            throw new IllegalStateException("undetermined case");
         }
 
         private static boolean hasFilenamePart(String[] filenameParts, int index) {
